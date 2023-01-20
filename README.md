@@ -1,5 +1,5 @@
-# C String Utils
-A C library that provides common string operations that the C standard library lacks.
+# String Utils
+A C library that provides common string operations that the standard library lacks.
 
 ## Features
 - C89 compliant.
