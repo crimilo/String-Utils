@@ -55,6 +55,7 @@ void test_str_ends_w_i()
 void test_str_cmp_i()
 {
    puts("Running test_str_cmp_i()...");
+   TEST_ASSERT(!str_cmp_i("", "123"));
    TEST_ASSERT(str_cmp_i("hello world", "hello world"));
    TEST_ASSERT(str_cmp_i("hello world", "Hello World"));
    TEST_ASSERT(str_cmp_i("Hello World", "hello world"));
@@ -67,6 +68,7 @@ void test_str_cmp_i()
 void test_str_ncmp_i()
 {
    puts("Running test_str_ncmp_i()...");
+   TEST_ASSERT(!str_ncmp_i("", "123", 3));
    TEST_ASSERT(str_ncmp_i("hello world", "hello world", 12));
    TEST_ASSERT(str_ncmp_i("hello world", "hello world", 100));
    TEST_ASSERT(str_ncmp_i("hello world", "hello world", 5));
@@ -82,6 +84,10 @@ void test_str_ncmp_i()
 void test_str_find()
 {
    puts("Running test_str_find()...");
+   TEST_ASSERT(str_find("", "") == EOS);
+   TEST_ASSERT(str_find("", "123") == EOS);
+   TEST_ASSERT(str_find("123", "") == EOS);
+   TEST_ASSERT(str_find("hello", "hello world") == EOS);
    TEST_ASSERT(str_find("hello world", "world") == 6);
    TEST_ASSERT(str_find("hello world", "rld") == 8);
    TEST_ASSERT(str_find("hello world", "123") == EOS);
@@ -93,6 +99,10 @@ void test_str_find()
 void test_str_find_i()
 {
    puts("Running test_str_find_i()...");
+   TEST_ASSERT(str_find_i("", "") == EOS);
+   TEST_ASSERT(str_find_i("", "123") == EOS);
+   TEST_ASSERT(str_find_i("123", "") == EOS);
+   TEST_ASSERT(str_find_i("hello", "hello world") == EOS);
    TEST_ASSERT(str_find_i("hello world", "world") == 6);
    TEST_ASSERT(str_find_i("hello world", "WoRlD") == 6);
    TEST_ASSERT(str_find_i("hello world", "rld") == 8);

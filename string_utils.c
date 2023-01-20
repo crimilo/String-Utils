@@ -91,12 +91,24 @@ int str_rfind(const char* str, const char* sub)
 
 int str_find_i(const char* str, const char* sub)
 {
-   size_t sub_len = strlen(sub);
+   if (!*sub)
+      return EOS;
 
-   for (int i = 0; *(str + sub_len - 1); i++, str++)
+   const char* offset = str;
+
+   for (; *str; str++)
    {
-      if (str_ncmp_i(str, sub, sub_len))
-         return i;
+      const char* str_cpy = str;
+      const char* sub_cpy = sub;
+
+      while (*str_cpy && tolower(*str_cpy) == tolower(*sub_cpy))
+      {
+         str_cpy++;
+         sub_cpy++;
+      }
+
+      if (!*sub_cpy)
+         return str - offset;
    }
 
    return EOS;
