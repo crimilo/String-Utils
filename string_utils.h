@@ -120,7 +120,7 @@ int str_rfind_i(const char* str, const char* sub);
 * @param res Buffer where to store the substring.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte), or 0 if an error occurs.
+* @return Number of characters stored into res (excluding null-byte), or 0 if an out-of-range error occurs.
 */
 int str_substr(const char* str, size_t pos, size_t cnt, char* res, size_t res_len);
 
@@ -150,7 +150,7 @@ size_t str_substr_cnt_i(const char* str, const char* sub);
 * @param str String to split.
 * @param delim String of delimiters with which to split str.
 *
-* @return Pointer to a null-terminated list of token strings, or NULL on error.
+* @return Pointer to a null-terminated list of token strings, or NULL on malloc() error.
 *
 * @note After a successfull call to str_split(), you should always free() each token and the returned pointer.
 *
@@ -177,7 +177,7 @@ char** str_split(const char* str, const char* delims);
 * @param res Buffer where to store the trimmed string.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte).
+* @return Number of characters stored into res (excluding null-byte), or EOS on error (res_len == 0).
 */
 int str_trim(const char* str, char* res, size_t res_len);
 
@@ -190,7 +190,7 @@ int str_trim(const char* str, char* res, size_t res_len);
 * @param res Buffer where to store the trimmed string.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte).
+* @return Number of characters stored into res (excluding null-byte), or EOS on error (res_len == 0).
 */
 int str_trim_s(const char* str, char* res, size_t res_len);
 
@@ -203,7 +203,7 @@ int str_trim_s(const char* str, char* res, size_t res_len);
 * @param res Buffer where to store the trimmed string.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte).
+* @return Number of characters stored into res (excluding null-byte), or EOS on error (res_len == 0).
 */
 int str_trim_e(const char* str, char* res, size_t res_len);
 

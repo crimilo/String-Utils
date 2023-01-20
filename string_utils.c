@@ -227,10 +227,16 @@ int is_trim_char(int c)
 
 int str_trim(const char* str, char* res, size_t res_len)
 {
+   if (!res_len)
+      return EOS;
+
    size_t str_len = strlen(str);
 
    if (!str_len)
+   {
+      res[0] = '\0';
       return 0;
+   }
 
    size_t start = 0;
 
@@ -253,10 +259,16 @@ int str_trim(const char* str, char* res, size_t res_len)
 
 int str_trim_s(const char* str, char* res, size_t res_len)
 {
+   if (!res_len)
+      return EOS;
+
    size_t str_len = strlen(str);
 
    if (!str_len)
+   {
+      res[0] = '\0';
       return 0;
+   }
 
    size_t i = 0;
    
@@ -273,10 +285,16 @@ int str_trim_s(const char* str, char* res, size_t res_len)
 
 int str_trim_e(const char* str, char* res, size_t res_len)
 {
+   if (!res_len)
+      return EOS;
+
    size_t str_len = strlen(str);
 
    if (!str_len)
+   {
+      res[0] = '\0';
       return 0;
+   }
 
    size_t i = str_len - 1;
    

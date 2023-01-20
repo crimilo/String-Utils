@@ -185,6 +185,7 @@ void test_str_trim()
    puts("Running test_str_trim()...");
    char trimmed[32];
    TEST_ASSERT(str_trim(" \thello\n\n", trimmed, 32) == 5);
+   TEST_ASSERT(str_trim("\thello\n", trimmed, 0) == EOS);
    TEST_ASSERT(!strcmp(trimmed, "hello"));
 }
 
@@ -196,6 +197,7 @@ void test_str_trim_s()
    TEST_ASSERT(!strcmp(trimmed, "hello"));
    TEST_ASSERT(str_trim_s(" \t\nhello  ", trimmed, 32) == 7);
    TEST_ASSERT(!strcmp(trimmed, "hello  "));
+   TEST_ASSERT(str_trim_s("\thello\n", trimmed, 0) == EOS);
 }
 
 void test_str_trim_e()
@@ -206,6 +208,7 @@ void test_str_trim_e()
    TEST_ASSERT(!strcmp(trimmed, "hello"));
    TEST_ASSERT(str_trim_e("  hello \t\n", trimmed, 32) == 7);
    TEST_ASSERT(!strcmp(trimmed, "  hello"));
+   TEST_ASSERT(str_trim_e("\thello\n", trimmed, 0) == EOS);
 }
 
 void test_str_split()
