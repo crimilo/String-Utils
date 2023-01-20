@@ -18,6 +18,18 @@ void test_str_starts_w()
    TEST_ASSERT(!str_starts_w("hello world", "world"));
 }
 
+void test_str_starts_w_i()
+{
+   puts("Running test_str_starts_w_i()...");
+   TEST_ASSERT(str_starts_w_i("hello world", "hello"));
+   TEST_ASSERT(str_starts_w_i("hello world", "heLLo"));
+   TEST_ASSERT(str_starts_w_i("HeLlo WORld", "heLLo"));
+   TEST_ASSERT(!str_starts_w_i("hello world", "hello world 1234"));
+   TEST_ASSERT(!str_starts_w_i("hello world", "ello"));
+   TEST_ASSERT(!str_starts_w_i("hello world", "world"));
+}
+
+
 void test_str_ends_w()
 {
    puts("Running test_str_ends_w()...");
@@ -25,6 +37,19 @@ void test_str_ends_w()
    TEST_ASSERT(!str_ends_w("hello world", "hello world 1234"));
    TEST_ASSERT(!str_ends_w("hello world", "hello"));
    TEST_ASSERT(!str_ends_w("hello world", "world123"));
+}
+
+void test_str_ends_w_i()
+{
+   puts("Running test_str_ends_w_i()...");
+   TEST_ASSERT(str_ends_w_i("hello world", "world"));
+   TEST_ASSERT(str_ends_w_i("hello world", "World"));
+   TEST_ASSERT(str_ends_w_i("hello WoRlD", "world"));
+   TEST_ASSERT(str_ends_w_i("hello WoRlD", "WORLD"));
+   TEST_ASSERT(!str_ends_w_i("hello w", "WORLD"));
+   TEST_ASSERT(!str_ends_w_i("hello world", "hello world 1234"));
+   TEST_ASSERT(!str_ends_w_i("hello world", "hello"));
+   TEST_ASSERT(!str_ends_w_i("hello world", "world123"));
 }
 
 void test_str_cmp_i()
@@ -202,7 +227,9 @@ void test_str_split()
 int main()
 {
    test_str_starts_w();
+   test_str_starts_w_i();
    test_str_ends_w();
+   test_str_ends_w_i();
    test_str_cmp_i();
    test_str_ncmp_i();
    test_str_find();

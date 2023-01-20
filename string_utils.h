@@ -16,6 +16,16 @@
 int str_starts_w(const char* str, const char* sub);
 
 /*
+* @brief Checks whether a string starts with another string case insensitive.
+*
+* @param str String to check.
+* @param sub Substring with which str must start.
+*
+* @return 1 if str starts with sub, 0 otherwise.
+*/
+int str_starts_w_i(const char* str, const char* sub);
+
+/*
 * @brief Checks whether a string ends with another string.
 *
 * @param str String to check.
@@ -24,6 +34,16 @@ int str_starts_w(const char* str, const char* sub);
 * @return 1 if str ends with sub, 0 otherwise.
 */
 int str_ends_w(const char* str, const char* sub);
+
+/*
+* @brief Checks whether a string ends with another string case insensitive.
+*
+* @param str String to check.
+* @param sub Substring with which str must end.
+*
+* @return 1 if str ends with sub, 0 otherwise.
+*/
+int str_ends_w_i(const char* str, const char* sub);
 
 /*
 * @brief Compares two strings case insensitive.

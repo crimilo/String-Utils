@@ -8,10 +8,12 @@ A C library that provides common string operations that the C standard library l
 - Well documented and easy to use.
 
 ## Functions
-| Name     | Description |
-|--------------------|---------------------|
+| Name                 | Description                                                                                                     |
+|----------------------|-----------------------------------------------------------------------------------------------------------------|
 | `str_starts_w()`     | Checks whether a string starts with another string.                                                             |
+| `str_starts_w_i()`   | Checks whether a string starts with another string case insensitive.                                            |
 | `str_ends_w()`       | Checks whether a string ends with another string.                                                               |
+| `str_ends_w_i()`     | Checks whether a string ends with another string case insensitive.                                              |
 | `str_cmp_i()`        | Compares two strings case insensitive.                                                                          |
 | `str_ncmp_i()`       | Compares two strings case insensitive. At most n characters are compared.                                       |
 | `str_find()`         | Checks whether a string contains another string.                                                                |

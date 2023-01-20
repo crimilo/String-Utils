@@ -5,10 +5,30 @@
 
 int str_starts_w(const char* str, const char* sub)
 {
-   size_t str_len = strlen(str);
-   size_t sub_len = strlen(sub);
+   if (!*sub)
+      return 0;
 
-   return str_len >= sub_len && !strncmp(str, sub, sub_len);
+   for (; *sub; sub++, str++)
+   {
+      if (*str != *sub)
+         return 0;
+   }
+
+   return !*sub;
+}
+
+int str_starts_w_i(const char* str, const char* sub)
+{
+   if (!*sub)
+      return 0;
+
+   for (; *sub; sub++, str++)
+   {
+      if (tolower(*str) != tolower(*sub))
+         return 0;
+   }
+
+   return !*sub;
 }
 
 int str_ends_w(const char* str, const char* sub)
@@ -17,6 +37,14 @@ int str_ends_w(const char* str, const char* sub)
    size_t sub_len = strlen(sub);
 
    return sub_len <= str_len && !strcmp(str + str_len - sub_len, sub);
+}
+
+int str_ends_w_i(const char* str, const char* sub)
+{
+   size_t str_len = strlen(str);
+   size_t sub_len = strlen(sub);
+
+   return sub_len <= str_len && str_cmp_i(str + str_len - sub_len, sub);
 }
 
 int str_cmp_i(const char* s1, const char* s2)
