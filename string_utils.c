@@ -66,7 +66,7 @@ int str_ncmp_i(const char* s1, const char* s2, size_t n)
          return 0;
    }
 
-   return !n || *s1 == *s2;
+   return !n | !(*s1 ^ *s2);
 }
 
 int str_find(const char* str, const char* sub)
@@ -101,10 +101,10 @@ int str_find_i(const char* str, const char* sub)
       const char* str_cpy = str;
       const char* sub_cpy = sub;
 
-      while (*str_cpy && tolower(*str_cpy) == tolower(*sub_cpy))
+      for (; *str_cpy; str_cpy++, sub_cpy++)
       {
-         str_cpy++;
-         sub_cpy++;
+         if (tolower(*str_cpy) != tolower(*sub_cpy))
+            break;
       }
 
       if (!*sub_cpy)
