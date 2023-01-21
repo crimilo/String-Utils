@@ -51,7 +51,7 @@ int str_ends_w_i(const char* str, const char* sub);
 * @param s1 First string to compare.
 * @param s2 Second string to compare.
 *
-* @return 1 if the strings are equal 0 otherwise.
+* @return 1 if the strings are equal, 0 otherwise.
 */
 int str_cmp_i(const char* s1, const char* s2);
 
@@ -73,7 +73,7 @@ int str_ncmp_i(const char* s1, const char* s2, size_t n);
 * @param str String to check.
 * @param sub Substring that str must contain.
 *
-* @return Index of the first occurrence of sub in str, EOS otherwise.
+* @return Index of the first occurrence of sub in str, or EOS if str does not contain sub.
 */
 int str_find(const char* str, const char* sub);
 
@@ -83,7 +83,7 @@ int str_find(const char* str, const char* sub);
 * @param str String to check.
 * @param sub Substring that str must contain.
 *
-* @return Index of the first occurrence of sub in str, EOS otherwise.
+* @return Index of the first occurrence of sub in str, or EOS if str does not contain sub.
 */
 int str_find_i(const char* str, const char* sub);
 
@@ -94,7 +94,7 @@ int str_find_i(const char* str, const char* sub);
 * @param str String to check.
 * @param sub Substring that str must contain.
 *
-* @return Index of the first occurrence of sub in str, EOS otherwise.
+* @return Index of the first occurrence of sub in str, or EOS if str does not contain sub.
 */
 int str_rfind(const char* str, const char* sub);
 
@@ -105,14 +105,14 @@ int str_rfind(const char* str, const char* sub);
 * @param str String to check.
 * @param sub Substring that str must contain.
 *
-* @return Index of the first occurrence of sub in str, EOS otherwise.
+* @return Index of the first occurrence of sub in str, or EOS if str does not contain sub.
 */
 int str_rfind_i(const char* str, const char* sub);
 
 /*
 * @brief Creates a substring from a string.
 * The substring will be null-terminated.
-* No more than res_len - 1 characters are stored into res.
+* At most res_len - 1 characters are stored into res.
 *
 * @param str String to create a substring from.
 * @param pos Position of the first character to include.
@@ -120,9 +120,11 @@ int str_rfind_i(const char* str, const char* sub);
 * @param res Buffer where to store the substring.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte), or 0 if an out-of-range error occurs.
+* @return Number of characters stored into res (including null-byte), or 0 on error.
+*
+* @note In case of error, res is not touched.
 */
-int str_substr(const char* str, size_t pos, size_t cnt, char* res, size_t res_len);
+size_t str_substr(const char* str, size_t pos, size_t cnt, char* res, size_t res_len);
 
 /*
 * @brief Count the number of substring occurrences in a string.
@@ -150,7 +152,7 @@ size_t str_substr_cnt_i(const char* str, const char* sub);
 * @param str String to split.
 * @param delim String of delimiters with which to split str.
 *
-* @return Pointer to a null-terminated list of token strings, or NULL on malloc() error.
+* @return Pointer to a null-terminated list of token strings, or NULL on error.
 *
 * @note After a successfull call to str_split(), you should always free() each token and the returned pointer.
 *
@@ -171,40 +173,40 @@ char** str_split(const char* str, const char* delims);
 /*
 * @brief Removes white spaces, tabs and new line characters from the start and end of a string.
 * The trimmed string will be null-terminated.
-* No more than res_len - 1 characters are stored into res.
+* At most res_len - 1 characters are stored into res.
 
 * @param str String to trim.
 * @param res Buffer where to store the trimmed string.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte), or EOS on error (res_len == 0).
+* @return Number of characters stored into res (including null-byte).
 */
-int str_trim(const char* str, char* res, size_t res_len);
+size_t str_trim(const char* str, char* res, size_t res_len);
 
 /*
 * @brief Removes white spaces, tabs and new line characters from the start of a string.
 * The trimmed string will be null-terminated.
-* No more than res_len - 1 characters are stored into res.
+* At most res_len - 1 characters are stored into res.
 
 * @param str String to trim.
 * @param res Buffer where to store the trimmed string.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte), or EOS on error (res_len == 0).
+* @return Number of characters stored into res (including null-byte).
 */
-int str_trim_s(const char* str, char* res, size_t res_len);
+size_t str_trim_s(const char* str, char* res, size_t res_len);
 
 /*
 * @brief Removes white spaces, tabs and new line characters from the end of a string.
 * The trimmed string will be null-terminated.
-* No more than res_len - 1 characters are stored into res.
+* At most res_len - 1 characters are stored into res.
 
 * @param str String to trim.
 * @param res Buffer where to store the trimmed string.
 * @param res_len Length of res.
 *
-* @return Number of characters stored into res (excluding null-byte), or EOS on error (res_len == 0).
+* @return Number of characters stored into res (including null-byte).
 */
-int str_trim_e(const char* str, char* res, size_t res_len);
+size_t str_trim_e(const char* str, char* res, size_t res_len);
 
 #endif

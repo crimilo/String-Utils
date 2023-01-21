@@ -4,7 +4,7 @@
 #include <string.h>
 
 #ifdef __FUNCTION__
-#define TEST_ASSERT(cond) if (!cond) { fprintf(stderr, "Test %s failed.\n", __FUNCTION__); exit(EXIT_FAILURE); }
+#define TEST_ASSERT(cond) if (!cond) { fprintf(stderr, "Test %s failed (%s:%d).\n", __FUNCTION__, __FILE__, __LINE__); exit(EXIT_FAILURE); }
 #else
 #define TEST_ASSERT(cond) if (!cond) { fprintf(stderr, "Test failed (%s:%d).\n", __FILE__, __LINE__); exit(EXIT_FAILURE); }
 #endif
@@ -143,11 +143,11 @@ void test_str_substr()
 {
    puts("Running test_str_substr()...");
    char substr[32];
-   TEST_ASSERT(str_substr("hello world", 6, 5, substr, 32) == 5);
+   TEST_ASSERT(str_substr("hello world", 6, 5, substr, 32) == 6);
    TEST_ASSERT(!strcmp(substr, "world"));
-   TEST_ASSERT(str_substr("hello world", 0, 11, substr, 32) == 11);
+   TEST_ASSERT(str_substr("hello world", 0, 11, substr, 32) == 12);
    TEST_ASSERT(!strcmp(substr, "hello world"));
-   TEST_ASSERT(str_substr("hello world", 0, 5, substr, 5) == 4);
+   TEST_ASSERT(str_substr("hello world", 0, 5, substr, 5) == 5);
    TEST_ASSERT(!strcmp(substr, "hell"));
    TEST_ASSERT(!str_substr("hello world", 12, 0, substr, 32));
    TEST_ASSERT(!str_substr("hello world", 6, 1024, substr, 32));
@@ -162,6 +162,10 @@ void test_str_substr_cnt()
    TEST_ASSERT(str_substr_cnt("hello world", "Hello") == 0);
    TEST_ASSERT(str_substr_cnt("hello world", "hello world 123") == 0);
    TEST_ASSERT(str_substr_cnt("@@@@@@@@@@", "@") == 10);
+   TEST_ASSERT(str_substr_cnt("", "123") == 0);
+   TEST_ASSERT(str_substr_cnt("", "") == 0);
+   TEST_ASSERT(str_substr_cnt("123", "") == 0);
+   TEST_ASSERT(str_substr_cnt("123", "123123123") == 0);
 }
 
 void test_str_substr_cnt_i()
@@ -170,6 +174,10 @@ void test_str_substr_cnt_i()
    TEST_ASSERT(str_substr_cnt_i("hello world", "l") == 3);
    TEST_ASSERT(str_substr_cnt_i("AAA bbb aaa ccc AAA ddd", "aAa") == 3);
    TEST_ASSERT(str_substr_cnt_i("hello world", "X") == 0);
+   TEST_ASSERT(str_substr_cnt_i("", "123") == 0);
+   TEST_ASSERT(str_substr_cnt_i("", "") == 0);
+   TEST_ASSERT(str_substr_cnt_i("123", "") == 0);
+   TEST_ASSERT(str_substr_cnt_i("123", "123123123") == 0);
    TEST_ASSERT(str_substr_cnt_i("heLLo woRld", "l") == 3);
    TEST_ASSERT(str_substr_cnt_i("hello world", "Hello") == 1);
    TEST_ASSERT(str_substr_cnt_i("hello world", "hello world 123") == 0);
@@ -184,7 +192,7 @@ void test_str_trim()
 {
    puts("Running test_str_trim()...");
    char trimmed[32];
-   TEST_ASSERT(str_trim(" \thello\n\n", trimmed, 32) == 5);
+   TEST_ASSERT(str_trim(" \thello\n\n", trimmed, 32) == 6);
    TEST_ASSERT(str_trim("\thello\n", trimmed, 0) == EOS);
    TEST_ASSERT(!strcmp(trimmed, "hello"));
 }
@@ -193,9 +201,9 @@ void test_str_trim_s()
 {
    puts("Running test_str_trim_s()...");
    char trimmed[32];
-   TEST_ASSERT(str_trim_s(" \t\nhello", trimmed, 32) == 5);
+   TEST_ASSERT(str_trim_s(" \t\nhello", trimmed, 32) == 6);
    TEST_ASSERT(!strcmp(trimmed, "hello"));
-   TEST_ASSERT(str_trim_s(" \t\nhello  ", trimmed, 32) == 7);
+   TEST_ASSERT(str_trim_s(" \t\nhello  ", trimmed, 32) == 8);
    TEST_ASSERT(!strcmp(trimmed, "hello  "));
    TEST_ASSERT(str_trim_s("\thello\n", trimmed, 0) == EOS);
 }
@@ -204,9 +212,9 @@ void test_str_trim_e()
 {
    puts("Running test_str_trim_e()...");
    char trimmed[32];
-   TEST_ASSERT(str_trim_e("hello \t\n", trimmed, 32) == 5);
+   TEST_ASSERT(str_trim_e("hello \t\n", trimmed, 32) == 6);
    TEST_ASSERT(!strcmp(trimmed, "hello"));
-   TEST_ASSERT(str_trim_e("  hello \t\n", trimmed, 32) == 7);
+   TEST_ASSERT(str_trim_e("  hello \t\n", trimmed, 32) == 8);
    TEST_ASSERT(!strcmp(trimmed, "  hello"));
    TEST_ASSERT(str_trim_e("\thello\n", trimmed, 0) == EOS);
 }

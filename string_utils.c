@@ -128,8 +128,11 @@ int str_rfind_i(const char* str, const char* sub)
    return EOS;
 }
 
-int str_substr(const char* str, size_t pos, size_t cnt, char* res, size_t res_len)
+size_t str_substr(const char* str, size_t pos, size_t cnt, char* res, size_t res_len)
 {
+   if (!res_len)
+      return 0;
+
    size_t str_len = strlen(str);
 
    if (!str_len)
@@ -143,18 +146,29 @@ int str_substr(const char* str, size_t pos, size_t cnt, char* res, size_t res_le
    memcpy(res, str + pos, chrs_to_cpy);
    res[chrs_to_cpy] = '\0';
 
-   return chrs_to_cpy;
+   return chrs_to_cpy + 1;
 }
 
 size_t str_substr_cnt(const char* str, const char* sub)
 {
+   if (!*sub)
+      return 0;
+
+   size_t str_len = strlen(str);
    size_t sub_len = strlen(sub);
+
+   if (sub_len > str_len)
+      return 0;
+
    size_t cnt = 0;
 
-   while ((str = strstr(str, sub)))
+   for (; *(str + sub_len - 1); str++)
    {
-      cnt++;
-      str += sub_len;
+      if (!strncmp(str, sub, sub_len))
+      {
+         cnt++;
+         str += sub_len;
+      }
    }
 
    return cnt;
@@ -162,7 +176,15 @@ size_t str_substr_cnt(const char* str, const char* sub)
 
 size_t str_substr_cnt_i(const char* str, const char* sub)
 {
+   if (!*sub)
+      return 0;
+
+   size_t str_len = strlen(str);
    size_t sub_len = strlen(sub);
+
+   if (sub_len > str_len)
+      return 0;
+
    size_t cnt = 0;
 
    for (; *(str + sub_len - 1); str++)
@@ -225,17 +247,17 @@ int is_trim_char(int c)
    return c == ' ' || c == '\n' || c == '\t';
 }
 
-int str_trim(const char* str, char* res, size_t res_len)
+size_t str_trim(const char* str, char* res, size_t res_len)
 {
    if (!res_len)
-      return EOS;
+      return 0;
 
    size_t str_len = strlen(str);
 
    if (!str_len)
    {
       res[0] = '\0';
-      return 0;
+      return 1;
    }
 
    size_t start = 0;
@@ -254,20 +276,20 @@ int str_trim(const char* str, char* res, size_t res_len)
    memcpy(res, str + start, chrs_to_cpy);
    res[chrs_to_cpy] = '\0';
 
-   return chrs_to_cpy;
+   return chrs_to_cpy + 1;
 }
 
-int str_trim_s(const char* str, char* res, size_t res_len)
+size_t str_trim_s(const char* str, char* res, size_t res_len)
 {
    if (!res_len)
-      return EOS;
+      return 0;
 
    size_t str_len = strlen(str);
 
    if (!str_len)
    {
       res[0] = '\0';
-      return 0;
+      return 1;
    }
 
    size_t i = 0;
@@ -280,20 +302,20 @@ int str_trim_s(const char* str, char* res, size_t res_len)
    memcpy(res, str + i, chrs_to_cpy);
    res[chrs_to_cpy] = '\0';
 
-   return chrs_to_cpy;
+   return chrs_to_cpy + 1;
 }
 
-int str_trim_e(const char* str, char* res, size_t res_len)
+size_t str_trim_e(const char* str, char* res, size_t res_len)
 {
    if (!res_len)
-      return EOS;
+      return 0;
 
    size_t str_len = strlen(str);
 
    if (!str_len)
    {
       res[0] = '\0';
-      return 0;
+      return 1;
    }
 
    size_t i = str_len - 1;
@@ -306,5 +328,5 @@ int str_trim_e(const char* str, char* res, size_t res_len)
    memcpy(res, str, chrs_to_cpy);
    res[chrs_to_cpy] = '\0';
 
-   return chrs_to_cpy;
+   return chrs_to_cpy + 1;
 }
