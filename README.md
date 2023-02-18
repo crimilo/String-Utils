@@ -7,6 +7,14 @@ A C library that provides common string operations that the standard library lac
 - Immutability oriented.
 - Well documented and easy to use.
 
+## Installation
+To install the library on your system as a static library using CMake:
+```console
+$ git clone https://github.com/crimilo/String-Utils.git
+$ cd String-Utils && mkdir build && cd build
+$ cmake .. && sudo make install
+```
+
 ## Functions
 | Name                 | Description                                                                                                     |
 |----------------------|-----------------------------------------------------------------------------------------------------------------|
