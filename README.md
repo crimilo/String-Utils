@@ -14,6 +14,9 @@ $ git clone https://github.com/crimilo/String-Utils.git
 $ cd String-Utils && mkdir build && cd build
 $ cmake .. && sudo make install
 ```
+After installing, you will be able to link against the library by adding `-lstring_utils` to your linking flags.
+
+Alternatively, you can add this repository directory to your CMake build tree with `add_subdirectory()` and link against the library using `target_link_libraries()`.
 
 ## Functions
 | Name                 | Description                                                                                                     |
